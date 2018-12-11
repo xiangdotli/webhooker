@@ -1,0 +1,10 @@
+groups:
+- name: example
+  rules:
+  - alert: HighNodeCPU
+    expr: (100-100*(avg by(instance)(rate(node_cpu_seconds_total{mode='idle'}[1m])))) > 75
+    for: 1m
+    labels:
+      severity: HighNodeCPU
+    annotations:
+      summary: High Node CPU detected, {{ $value }}

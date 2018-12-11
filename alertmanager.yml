@@ -1,0 +1,14 @@
+
+route:
+  receiver: 'telegram'
+  group_by: ['job', 'alertname']
+  # how long to wait to buffer alerts of the same group before sending initially
+  group_wait: 30s
+  # how long to wait before sending an alert that has been added to a group which contains already fired alerts
+  group_interval: 1m
+  # how long to wait before re-sending a given alert that has already been sent.
+  repeat_interval: 1m
+receivers:
+- name: 'telegram'
+  webhook_configs:
+    - url: http://localhost:9091/alerts
